@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import Parser from "./Parser";
 import "./App.css";
 
 function App() {
-  const xmlString = useState(0)
-  const xmlString = '<xml></xml>'
-  const downloadTxtFile = (string) => {
+  const stringToXMLFile = (input) => {
     const element = document.createElement("a");
-    const file = new Blob([string], {
+    const file = new Blob([input], {
       type: "text/xml",
     });
     element.href = URL.createObjectURL(file);
@@ -21,8 +20,11 @@ function App() {
         A tool to convert a .csv file containing redirects to the XML format
         expected by the Episerver Redirect Manager
       </p>
+      <Parser createXML={stringToXMLFile}>
+        <span>Drop CSV file here or click to upload.</span>
+      </Parser>
       <div>
-        <button onClick={downloadTxtFile}>Download XML</button>
+        <button onClick={stringToXMLFile}>Download XML</button>
       </div>
     </div>
   );
