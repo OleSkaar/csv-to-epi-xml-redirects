@@ -6,7 +6,12 @@ import stringToXMLFile from './utils/stringToXMLFile';
 function App() {
     return (
         <div className="App">
-            <h1>CSV to Episerver XML redirects</h1>
+            <h1>
+                <span role="img" aria-label="Right arrow">
+                    ➡️
+                </span>{' '}
+                CSV to Episerver XML redirects
+            </h1>
             <p>
                 A tool to convert a .csv file containing redirects to the XML
                 format expected by the Episerver Redirect Manager.
@@ -25,7 +30,7 @@ function App() {
                 <em>
                     PS: The tool filters out any redirects that don't start with
                     a slash followed by one or more characters. For example:
-                    /about-us/ is a valid url, but about-us/ is not.
+                    /about-us/ is a valid link, but about-us/ is not.
                 </em>
             </p>
             <Parser createXML={stringToXMLFile}>

@@ -4,6 +4,11 @@
     margin: auto;
 }
 
+.App h1 {
+  padding-bottom: 7px;
+  border-bottom: 3px dashed #ccc;
+}
+
 .dropField {
     transition: 0.25s all linear;
     border-radius: 20px;
