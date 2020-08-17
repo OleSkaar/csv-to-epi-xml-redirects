@@ -1,33 +1,38 @@
-import React, { useState } from "react";
-import Parser from "./Parser";
-import "./App.css";
+import React from 'react';
+import Parser from './Parser';
+import './App.css';
+import stringToXMLFile from './utils/stringToXMLFile';
 
 function App() {
-  const stringToXMLFile = (input) => {
-    const element = document.createElement("a");
-    const file = new Blob([input], {
-      type: "text/xml",
-    });
-    element.href = URL.createObjectURL(file);
-    element.download = "myFile.xml";
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
-  };
-  return (
-    <div className="App">
-      <h1>CSV to Episerver XML redirects</h1>
-      <p>
-        A tool to convert a .csv file containing redirects to the XML format
-        expected by the Episerver Redirect Manager
-      </p>
-      <Parser createXML={stringToXMLFile}>
-        <span>Drop CSV file here or click to upload.</span>
-      </Parser>
-      <div>
-        <button onClick={stringToXMLFile}>Download XML</button>
-      </div>
-    </div>
-  );
+    return (
+        <div className="App">
+            <h1>CSV to Episerver XML redirects</h1>
+            <p>
+                A tool to convert a .csv file containing redirects to the XML
+                format expected by the Episerver Redirect Manager.
+            </p>
+            <p>
+                To use the tool, create a list of redirects in a spreadsheet
+                tool, where the first column is the link to be redirected{' '}
+                <em>from</em>, and the second column is the link to be
+                redirected <em>to</em>.
+            </p>
+            <p>
+                Then, upload the file here, and it will automatically convert it
+                to the XML format expected by the Episerver Redirect Manager.
+            </p>
+            <p>
+                <em>
+                    PS: The tool filters out any redirects that don't start with
+                    a slash followed by one or more characters. For example:
+                    /about-us/ is a valid url, but about-us/ is not.
+                </em>
+            </p>
+            <Parser createXML={stringToXMLFile}>
+                <span>Drop CSV file here or click to browse your files.</span>
+            </Parser>
+        </div>
+    );
 }
 
 export default App;

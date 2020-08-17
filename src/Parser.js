@@ -1,38 +1,67 @@
-import React, { Component } from 'react'
- 
-import { CSVReader } from 'react-papaparse'
- 
+import React, { Component } from 'react';
+
+import { CSVReader } from 'react-papaparse';
+import arrayToXml from './utils/arrayToXml';
+
 export default class Parser extends Component {
-  handleOnDrop = (data) => {
-    console.log('---------------------------')
-    console.log(data)
-    console.log('---------------------------')
-    // TODO Replace with function that parses CSV and converts to XML string.
-    const dataString = data.toString()
-    this.props.createXML(dataString)
-  }
- 
-  handleOnError = (err, file, inputElem, reason) => {
-    console.log(err)
-  }
- 
-  handleOnRemoveFile = (data) => {
-    console.log('---------------------------')
-    console.log(data)
-    console.log('---------------------------')
-  }
- 
-  render() {
-    return (
-      <CSVReader
-        onDrop={this.handleOnDrop}
-        onError={this.handleOnError}
-        addRemoveButton
-        removeButtonColor='#659cef'
-        onRemoveFile={this.handleOnRemoveFile}
-      >
-        <span>Drop CSV file here or click to upload.</span>
-      </CSVReader>
-    )
-  }
+    dropAreaStyle = {
+        dropArea: {
+            height: '40vh',
+            dropFile: {
+                fileSizeInfo: {
+                    borderRadius: 3,
+                    lineHeight: '1.1em',
+                    marginBottom: '0.5em',
+                    padding: '0.5em',
+                    overflowWrap: 'anywhere',
+                },
+                fileNameInfo: {
+                    borderRadius: 3,
+                    fontSize: 14,
+                    lineHeight: '1.1em',
+                    padding: '0.5em',
+                    overflowWrap: 'anywhere',
+                },
+            },
+            highlight: {
+                borderColor: 'red'
+            }
+        },
+        highlight: {
+            borderColor: 'red',
+            backgroundColor: 'red'
+        }
+    };
+    handleOnDrop = (data) => {
+        const dataString = arrayToXml(data);
+        this.props.createXML(dataString);
+    };
+
+    handleOnError = (err, file, inputElem, reason) => {
+        alert(
+            `Error: ${err}, File: ${file}, Reason: ${reason}, Input element: ${inputElem}`
+        );
+    };
+
+    handleOnRemoveFile = (data) => {
+        alert('File removed. Please upload again.');
+    };
+
+    render() {
+        return (
+            <div className="dropField">
+                <CSVReader
+                    configOptions={{error: this.handleOnError}}
+                    style={this.dropAreaStyle}
+                    onDrop={this.handleOnDrop}
+                    onError={this.handleOnError}
+                    addRemoveButton
+                    removeButtonColor="#659cef"
+                    onRemoveFile={this.handleOnRemoveFile}
+                >
+                    <span>Drop CSV file here or click to upload.</span>
+                </CSVReader>
+            </div>
+        );
+    }
 }
