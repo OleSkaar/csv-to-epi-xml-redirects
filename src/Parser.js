@@ -23,14 +23,11 @@ export default class Parser extends Component {
                     overflowWrap: 'anywhere',
                 },
             },
-            highlight: {
-                borderColor: 'red'
-            }
+            dropAreaActive: {
+                backgroundColor: 'cornsilk',
+                transition: '0.25s all linear',
+            },
         },
-        highlight: {
-            borderColor: 'red',
-            backgroundColor: 'red'
-        }
     };
     handleOnDrop = (data) => {
         const dataString = arrayToXml(data);
@@ -51,7 +48,7 @@ export default class Parser extends Component {
         return (
             <div className="dropField">
                 <CSVReader
-                    configOptions={{error: this.handleOnError}}
+                    configOptions={{ error: this.handleOnError }}
                     style={this.dropAreaStyle}
                     onDrop={this.handleOnDrop}
                     onError={this.handleOnError}
