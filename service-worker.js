@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/csv-to-epi-xml-redirects/precache-manifest.5ecb641833f1115eeca00ee3499c82fd.js"
+  "/csv-to-epi-xml-redirects/precache-manifest.09ed605a6b48dc6892e5c5cf9a59ee94.js"
 );
 
 self.addEventListener('message', (event) => {
